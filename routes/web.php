@@ -14,3 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('home', function() {
+	return view('admin.product.dashboard');
+});
+
+
+Route::middleware(['admin'])->group(function () {
+
+	// Matches The "/admin/users" URL
+    Route::prefix('category')->group(function () {
+
+    	// List Category
+	    Route::get('users', 'CategoryController@index');
+	});
+
+});
