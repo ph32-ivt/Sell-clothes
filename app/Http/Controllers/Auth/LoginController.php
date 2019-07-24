@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
+use Auth;
+use App\User;
+use Hash;
 
 class LoginController extends Controller
 {
@@ -34,6 +39,52 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('getLogout');
     }
+
+    public function getLogin()
+    {
+        return view('admin.login.index');
+    }
+
+    public function postLogin(LoginRequest $request)
+    {
+        $login = array(
+            'email'    => $request->email,
+            'password' => $request->password,
+            'role_id'  => 1
+        );
+        if (Auth::attempt($login)) {
+            return redirect()->route('product-list');
+        } else {
+            return redirect()->back()->with(['type_message' => 'danger', 'flash_message' => 'You don\'t have permission access this page !']);
+        }
+    }
+
+    public function getRegister()
+    {
+        return view('admin.login.register');
+    }
+
+    public function postRegister(RegisterRequest $request)
+    {
+        $register = User::create([
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'password'  => Hash::make($request->password),
+            'telephone' => $request->telephone,
+            'address'   => $request->address,
+            'role_id'   => $request->role_id,
+            'gender'    => $request->gender
+        ]);
+        return redirect()->route('getLogin')->with(['type_message' => 'success', 'flash_message' => 'Success ! Complete create username']);
+    }
+
+    public function getLogout()
+    {
+        Auth::logout();
+        return redirect('auth/login');
+        // return redirect(\URL::previous());
+    }
+
 }

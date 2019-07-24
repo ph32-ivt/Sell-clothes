@@ -9,7 +9,7 @@ class Image extends Model
     protected $table = 'images';
 
     protected $fillable = [
-    	'name', 'path', 'product_id'
+    	'name', 'product_id'
     ];
 
     public function product()

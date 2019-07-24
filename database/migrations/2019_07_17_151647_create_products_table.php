@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name')->unique();
             $table->string('status');
             $table->float('price');
+            $table->string('image');
             $table->string('description');
-            $table->string('size');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
