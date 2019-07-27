@@ -9,10 +9,10 @@
                     Free shipping for standard order over $100
                 </div>
                 <div class="right-top-bar flex-w h-full">
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    <a href="{{ route('getLogin') }}" class="flex-c-m trans-04 p-lr-25">
                     Đăng kí
                     </a>
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    <a href="{{ route('getRegister') }}" class="flex-c-m trans-04 p-lr-25">
                     Đăng nhập
                     </a>
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
@@ -31,43 +31,56 @@
                 <div class="menu-desktop">
                     <ul class="main-menu">
                         <li class="active-menu">
-                            <a href="index.html">Home</a>
+                            <a href="{{ route('homepage') }}">Trang chủ</a>
+                        </li>
+                        <?php
+                            $menu_level = DB::table('categories')->where('parent_id', 0)->get();
+                        ?>
+                        @foreach($menu_level as $menu)
+                        <li>
+                            <a href="{{ route('product-type', $menu->id) }}">{{ $menu->name }}</a>
                             <ul class="sub-menu">
-                                <li><a href="index.html">Homepage 1</a></li>
-                                <li><a href="home-02.html">Homepage 2</a></li>
-                                <li><a href="home-03.html">Homepage 3</a></li>
+                                <?php
+                                    $sub_menu = DB::table('categories')->where('parent_id', $menu->id)->get();
+                                ?>
+                                @foreach($sub_menu as $item)
+                                <li><a href="index.html">{{ $item->name }}</a></li>
+                                @endforeach
                             </ul>
                         </li>
-                        <li>
-                            <a href="product.html">Shop</a>
-                        </li>
+                        @endforeach
                         <li class="label1" data-label1="hot">
-                            <a href="shoping-cart.html">Features</a>
-                        </li>
-                        <li>
-                            <a href="blog.html">Blog</a>
-                        </li>
-                        <li>
-                            <a href="about.html">About</a>
-                        </li>
-                        <li>
-                            <a href="contact.html">Contact</a>
+                            <a href="shoping-cart.html">Liên hệ</a>
                         </li>
                     </ul>
                 </div>
+                
                 <!-- Icon header -->
                 <div class="wrap-icon-header flex-w flex-r-m">
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-                        <i class="zmdi zmdi-search"></i>
+                    <div class="bor17 of-hidden pos-relative">
+                        <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+
+                        <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
+                            <i class="zmdi zmdi-search"></i>
+                        </button>
                     </div>
+
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
-                    <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-                    <i class="zmdi zmdi-favorite-outline"></i>
-                    </a>
-                </div>
+                </div>               
             </nav>
+
+            <!-- Search product -->
+            <div class="dis-none panel-search w-full p-t-10 p-b-15" style="width: 960px; margin: 0 auto;">
+                <div class="bor17 of-hidden pos-relative">
+                    <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+
+                    <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
+                        <i class="zmdi zmdi-search"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Header Mobile -->
@@ -119,31 +132,22 @@
         </ul>
         <ul class="main-menu-m">
             <li>
-                <a href="index.html">Home</a>
-                <ul class="sub-menu-m">
-                    <li><a href="index.html">Homepage 1</a></li>
-                    <li><a href="home-02.html">Homepage 2</a></li>
-                    <li><a href="home-03.html">Homepage 3</a></li>
-                </ul>
+                <a href="index.html">Trang chủ</a>
+                
                 <span class="arrow-main-menu-m">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </span>
             </li>
+            @foreach($menu_level as $menu)
             <li>
-                <a href="product.html">Shop</a>
+                <a href="product.html">{{ $menu->name }}</a>
+                <ul class="sub-menu-m">
+                @foreach($sub_menu as $item)
+                    <li><a href="index.html">{{ $item->name }}</a></li>
+                @endforeach
+                </ul>
             </li>
-            <li>
-                <a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
-            </li>
-            <li>
-                <a href="blog.html">Blog</a>
-            </li>
-            <li>
-                <a href="about.html">About</a>
-            </li>
-            <li>
-                <a href="contact.html">Contact</a>
-            </li>
+            @endforeach
         </ul>
     </div>
     <!-- Modal Search -->

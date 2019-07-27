@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <!-- Thông báo lỗi -->
-                @include('admin.blocks.error')
+                {{-- @include('admin.blocks.error') --}}
 
                 <form method="POST" action="{{ route('category-store') }}">
 					@csrf
@@ -38,8 +38,11 @@
 				    </div>
 
                     <div class="form-group">
-                        <label for="name">Category Name</label>
-                        <input name="name" type="text" class="form-control" placeholder="Enter category name">
+                        <label for="name">Category Name <span style="color: red">*</span></label>
+                        <input name="name" type="text" class="form-control" placeholder="Enter category name" value="{{ old('name') }}">
+                        @if($errors->has('name'))
+                            <p class="is-danger">{{ $errors->first('name') }}</p>
+                        @endif
                     </div>
 
 					{{-- <div class="form-group">

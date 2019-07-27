@@ -3,14 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Order_detail extends Model
+class OrderDetail extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'order_details';
 
     protected $fillable = [
     	'quantity', 'price', 'order_id', 'product_id'
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function order()
     {

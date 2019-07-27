@@ -1,4 +1,4 @@
-$("div.alert").delay(4000).slideUp();
+$("div.alert").delay(5000).slideUp();
 
 function accessDelete(message)
 {

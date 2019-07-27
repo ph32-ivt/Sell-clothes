@@ -44,6 +44,7 @@ class LoginController extends Controller
 
     public function getLogin()
     {
+        // dd(bcrypt(123456));
         return view('admin.login.index');
     }
 
@@ -52,13 +53,24 @@ class LoginController extends Controller
         $login = array(
             'email'    => $request->email,
             'password' => $request->password,
-            'role_id'  => 1
+            // 'role_id'  => 1
         );
-        if (Auth::attempt($login)) {
-            return redirect()->route('product-list');
+        $user = User::where('email', $request->email)->first();
+        if ($user->role_id == 1 || $user->role_id == 2) {
+            if (Auth::attempt($login)) {
+                return redirect()->route('product-list');
+            } else {
+                return redirect()->back()->with(['type_message' => 'danger', 'flash_message' => 'Email or Password is not correct !']);
+            }
         } else {
-            return redirect()->back()->with(['type_message' => 'danger', 'flash_message' => 'You don\'t have permission access this page !']);
+            return redirect()->back()->with(['type_message' => 'danger', 'flash_message' => 'Password is not correct !']);
         }
+        // if (Auth::attempt($login)) {
+        //     return redirect()->route('product-list');
+        // } else {
+        //     return redirect()->back()->with(['type_message' => 'danger', 'flash_message' => 'Password is not correct !']);
+        // }
+        
     }
 
     public function getRegister()
@@ -68,15 +80,19 @@ class LoginController extends Controller
 
     public function postRegister(RegisterRequest $request)
     {
-        $register = User::create([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'password'  => Hash::make($request->password),
-            'telephone' => $request->telephone,
-            'address'   => $request->address,
-            'role_id'   => $request->role_id,
-            'gender'    => $request->gender
-        ]);
+        $data = $request->all();
+        $data['password'] = Hash::make($request->password);
+        // $register = User::create([
+        //     'name'      => $request->name,
+        //     'email'     => $request->email,
+        //     'password'  => Hash::make($request->password),
+        //     'telephone' => $request->telephone,
+        //     'address'   => $request->address,
+        //     'role_id'   => $request->role_id,
+        //     'gender'    => $request->gender
+        // ]);
+        $register = User::create($data);
+        // $register->create($data);
         return redirect()->route('getLogin')->with(['type_message' => 'success', 'flash_message' => 'Success ! Complete create username']);
     }
 

@@ -34,6 +34,7 @@
 
         <link rel="stylesheet" type="text/css" href="user/css/util.css">
         <link rel="stylesheet" type="text/css" href="user/css/main.css">
+        <link rel="stylesheet" type="text/css" href="user/css/my-style.css">
         <!--===============================================================================================-->
     </head>
     <body class="animsition">
@@ -60,7 +61,7 @@
         </div>
 
         <!-- Modal1 -->
-        @include('user.layouts.modal-cart')
+        @include('user.layouts.modal-product-detail')
         <!--===============================================================================================-->	
         <script src="user/vendor/jquery/jquery-3.2.1.min.js"></script>
         <!--===============================================================================================-->

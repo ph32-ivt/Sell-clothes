@@ -50,15 +50,23 @@
                 <form method="POST" action="{{ route('product-update', $product->id) }}" enctype="multipart/form-data" name="formEditProduct">
 					@csrf
 					@method('POST')
-
+                    
+                    <div class="form-group">
+                        <label for="cate_parent">Category Parent</label>
+                        <select class="form-control" name="cate_parent" id="cate_parent">
+                            <option value="0" disabled selected>Please choose Category Parent</option>
+                            @foreach($cate_parent as $cp)
+                                <option {{ $product->cate_parent == $cp->id ? 'selected' : '' }} value="{{ $cp->id }}">{{ $cp->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="category_id">Category Name</label>
-                        <select class="form-control" name="category_id">
-                            <option value="" selected disabled>Please choose Category Name</option>
-                            {{ category_parent($listCategory, 0, "--", $product->category_id) }}
-                            {{-- @foreach($listCategory as $category)
-                                <option {{ $category->id == ($product->category_id) ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach --}}
+                        <select class="form-control" name="category_id" id="category_id">
+                            <option value="0" disabled selected>Please choose Category Name</option>
+                            @foreach($category_id as $cate)
+                                <option {{ $product->category_id == $cate->id ? 'selected' : '' }} value="{{ $cate->id }}">{{ $cate->name }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -111,4 +119,17 @@
 
     </div>
 	
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $("#cate_parent").change(function() {
+                var idCate_parent = $(this).val();
+                $.get("admin/products/create/"+idCate_parent, function(data) {
+                    $("#category_id").html(data);
+                });
+            });
+        });
+    </script>
 @endsection

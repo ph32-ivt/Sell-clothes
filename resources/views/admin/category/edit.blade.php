@@ -16,7 +16,7 @@
                     </li>
                 </ol>
                 <!-- Thông báo lỗi -->
-                @include('admin.blocks.error')
+                {{-- @include('admin.blocks.error') --}}
 
             </div>
         </div>
@@ -32,12 +32,15 @@
                         <label for="parent_id">Parent_Id</label>
                         <select name="parent_id" class="form-control">
                             <option value="0" disabled="disabled">Please Choose Category</option>
-                            <?php category_parent($cate_parent, 0, "--", $category['parent_id']) ?>
+                            <?php edit_category_parent($cate_parent, 0, "--", $category['parent_id']) ?>
                         </select>
                     </div>
 				    <div class="form-group">
 				        <label for="name">Name</label>
 				        <input name="name" type="text" class="form-control" placeholder="Enter category name" value="{{ $category['name'] }}">
+                        @if($errors->has('name'))
+                            <p class="is-danger">{{ $errors->first('name') }}</p>
+                        @endif
 				    </div>
 
 				    <button type="submit" class="btn btn-primary">Submit</button>

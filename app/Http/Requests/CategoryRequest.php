@@ -31,8 +31,8 @@ class CategoryRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng nhập tên category',
-            'name.unique' => 'Tên này đã tồn tại ! Vui lòng nhập lại tên khác'
+            'name.required' => 'Please enter category name.',
+            'name.unique' => 'This name is exists ! Please enter another name.'
         ];
     }
 }

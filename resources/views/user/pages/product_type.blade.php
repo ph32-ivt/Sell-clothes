@@ -1,75 +1,6 @@
 @extends('user.layouts.master')
-@section('content')
-	<!-- Slider -->
-    <section class="section-slide">
-        <div class="wrap-slick1">
-            <div class="slick1">
-                <div class="item-slick1" style="background-image: url(user/images/slide-01.jpg);">
-                    <div class="container h-full">
-                        <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                            <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
-                                <span class="ltext-101 cl2 respon2">
-                                Women Collection 2018
-                                </span>
-                            </div>
-                            <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
-                                <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                    NEW SEASON
-                                </h2>
-                            </div>
-                            <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-                                <a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                Shop Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-slick1" style="background-image: url(user/images/slide-02.jpg);">
-                    <div class="container h-full">
-                        <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                            <div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
-                                <span class="ltext-101 cl2 respon2">
-                                Men New-Season
-                                </span>
-                            </div>
-                            <div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
-                                <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                    Jackets & Coats
-                                </h2>
-                            </div>
-                            <div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-                                <a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                Shop Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-slick1" style="background-image: url(user/images/slide-03.jpg);">
-                    <div class="container h-full">
-                        <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                            <div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
-                                <span class="ltext-101 cl2 respon2">
-                                Men Collection 2018
-                                </span>
-                            </div>
-                            <div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
-                                <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                    New arrivals
-                                </h2>
-                            </div>
-                            <div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
-                                <a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                Shop Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+@section('content')	
+
     <!-- Banner -->
     <div class="sec-banner bg0 p-t-80 p-b-50">
         <div class="container">
@@ -140,7 +71,8 @@
             </div>
         </div>
     </div>
-    <!-- Product -->
+
+	<!-- Product -->
     <section class="bg0 p-t-23 p-b-140">
         <div class="container">
             <div class="p-b-10">
@@ -151,7 +83,7 @@
             <div class="flex-w flex-sb-m p-b-52">
                 <div class="flex-w flex-l-m filter-tope-group m-tb-10">
                     <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-                    All Products
+                    {{ $parent_id->name }}
                     </button>
                     @foreach($category as $cate)
 	                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".{{ $cate->id }}">
@@ -220,11 +152,11 @@
             </div>
             <div class="row isotope-grid">
             @foreach($product as $item)	
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{ $item->cate_parent }}">
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{ $item->category_id }}">
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
+                        	<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
                             <img src="upload/{{ $item->image }}" alt="IMG-PRODUCT" height="350px">
                             <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             Quick View
@@ -240,10 +172,10 @@
                                 </span>
                             </div>
                             <div class="block2-txt-child2 flex-r p-t-3">
-                                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-                                        <i class="zmdi zmdi-shopping-cart"></i>
-                                    </div>
+                            	<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+	                              	<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+				                        <i class="zmdi zmdi-shopping-cart"></i>
+				                    </div>
                                 </a>
                             </div>
                         </div>

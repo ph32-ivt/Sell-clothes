@@ -52,6 +52,8 @@ Route::prefix('admin')->group(function () {
 		    // Create Product
 		    Route::get('create', 'ProductController@create')->name('product-create');
 		    Route::post('create', 'ProductController@store')->name('product-store');
+		    // Get Category By Category Parent
+		    Route::get('create/{idCate_parent}', 'ProductController@getCategory');
 
 		    // Edit Product
 		    Route::get('edit/{id}', 'ProductController@edit')->name('product-edit');
@@ -103,6 +105,12 @@ Route::get('auth/logout', 'Auth\LoginController@getLogout')->name('getLogout');
 
 ////////////////////////////////////
 
-Route::get('users', function() {
-	return view('user.pages.homepage');
+
+Route::prefix('users')->group(function () {
+	// Homapage
+    Route::get('homepage', 'PageController@index')->name('homepage');
+    // Product Type
+    Route::get('product-type/{id}', 'PageController@productType')->name('product-type');
+    // Product Detail
+    Route::get('product-detail/{id}', 'PageController@productDetail')->name('product-detail');
 });

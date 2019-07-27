@@ -30,6 +30,9 @@
             font-size: 15px;
             font-weight: bold;
             }
+            .is-danger {
+                color: red;
+            }
         </style>
     </head>
     <body>
@@ -41,16 +44,22 @@
                 </div>
             @endif
             <form action="{{-- {{ route('postLogin') }} --}}" method="post">
-                <h2 class="text-center">Log in</h2>
+                <h2 class="text-center">Login</h2>
                 <!-- Message Error -->
                 @csrf
-                @include('admin.blocks.error')
+                {{-- @include('admin.blocks.error') --}}
 
                 <div class="form-group">
-                    <input name="email" type="text" class="form-control" placeholder="Email" {{-- required="required" --}}>
+                    <input name="email" type="text" class="form-control" placeholder="Email" value="{{ old('email') }}">
+                    @if($errors->has('email'))
+                        <p class="is-danger">{{ $errors->first('email') }}</p>
+                    @endif
                 </div>
                 <div class="form-group">
-                    <input name="password" type="password" class="form-control" placeholder="Password" {{-- required="required" --}}>
+                    <input name="password" type="password" class="form-control" placeholder="Password">
+                    @if($errors->has('password'))
+                        <p class="is-danger">{{ $errors->first('password') }}</p>
+                    @endif
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Log in</button>

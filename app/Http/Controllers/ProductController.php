@@ -23,8 +23,9 @@ class ProductController extends Controller
     public function create()
     {
     	// $listCategory = Category::where('parent_id', '<>', '0')->get();
-        $listCategory = Category::all();    
-    	return view('admin.product.create', compact('listCategory'));
+        $cate_parent = Category::where('parent_id', 0)->get();
+        $category_id = Category::where('parent_id', 1)->orWhere('parent_id', 2)->get();    
+    	return view('admin.product.create', compact('cate_parent', 'category_id'));
     }
     public function store(ProductRequest $request)
     {
@@ -34,6 +35,7 @@ class ProductController extends Controller
             'price'       => $request->price,
             'description' => $request->description,
             'image'       => $request->file('image')->getClientOriginalName(),
+            'cate_parent' => $request->cate_parent,
             'category_id' => $request->category_id,
             $request->file('image')->move(public_path('upload/'), $request->file('image')->getClientOriginalName())
         ]);
@@ -57,6 +59,11 @@ class ProductController extends Controller
 
     public function delete($id)
     {
+        // $product = Product::with('images')->find($id);
+        // foreach ($product_detail as $value) {
+        //     File::delete(public_path('/upload/detail/'.$value['name'])); 
+        // }
+        ///
         $product_detail = Product::find($id)->images->toArray();
         foreach ($product_detail as $value) {
             File::delete(public_path('/upload/detail/'.$value['name'])); 
@@ -69,17 +76,19 @@ class ProductController extends Controller
 
     public function edit($id)
     {
+        $cate_parent = Category::where('parent_id', 0)->get();
+        $category_id = Category::where('parent_id', 1)->orWhere('parent_id', 2)->get();
         $listCategory = Category::all();
         $product = Product::find($id);
         $product_img = Product::find($id)->images;
-        return view('admin.product.edit', compact('product', 'listCategory', 'product_img'));
+        return view('admin.product.edit', compact('product', 'listCategory', 'product_img', 'cate_parent', 'category_id'));
     }
 
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
         $data = Request::except('_token');
-        $data = Request::only('category_id', 'name', 'status', 'price', 'description');
+        $data = Request::only('category_id', 'cate_parent', 'name', 'status', 'price', 'description');
         $product->update($data);
 
         // Delete & Change image
@@ -132,6 +141,14 @@ class ProductController extends Controller
                 $image_detail->delete();
             }
             return "Oke";
+        }
+    }
+
+    public function getCategory($idCate_parent)
+    {
+        $category_id = Category::where('parent_id', $idCate_parent)->get();
+        foreach ($category_id as $cate) {
+            echo "<option value='".$cate->id."'>".$cate->name."</option>";
         }
     }
 }

@@ -97,6 +97,9 @@
             }	
             .signup-form form a:hover{
             text-decoration: underline;
+            }
+            .is-danger {
+                color: red;
             }  
         </style>
     </head>
@@ -105,25 +108,43 @@
             <form action="{{ route('postRegister') }}" method="post">
                 <h2>Register</h2>
                 @csrf
-                @include('admin.blocks.error')
+                {{-- @include('admin.blocks.error') --}}
                 <p class="hint-text">Create your account. It's free and only takes a minute.</p>
                 <div class="form-group">
                     <input type="text" class="form-control" name="name" placeholder="Username" value="{{ old('name') }}">
+                    @if($errors->has('name'))
+                        <p class="is-danger">{{ $errors->first('name') }}</p>
+                    @endif
                 </div>
                 <div class="form-group">
                     <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}">
+                    @if($errors->has('email'))
+                        <p class="is-danger">{{ $errors->first('email') }}</p>
+                    @endif
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="password" placeholder="Password">
+                    @if($errors->has('password'))
+                        <p class="is-danger">{{ $errors->first('password') }}</p>
+                    @endif
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="re-password" placeholder="Confirm Password">
+                    @if($errors->has('re-password'))
+                        <p class="is-danger">{{ $errors->first('re-password') }}</p>
+                    @endif
                 </div>
                 <div class="form-group">
                     <input name="telephone" type="text" class="form-control" placeholder="Enter your telephone" value="{{ old('telephone') }}">
+                    @if($errors->has('telephone'))
+                        <p class="is-danger">{{ $errors->first('telephone') }}</p>
+                    @endif
                 </div>
                 <div class="form-group">
                     <input name="address" type="text" class="form-control" placeholder="Enter your address" value="{{ old('address') }}">
+                    @if($errors->has('address'))
+                        <p class="is-danger">{{ $errors->first('address') }}</p>
+                    @endif
                     <input type="hidden" name="role_id" value="2">
                 </div>
                 <div class="form-group">
