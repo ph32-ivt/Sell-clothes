@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
+        <meta name="_token" content="{{ csrf_token() }}">
         <title>Admin Area - Shop Cloths Online</title>
         <base href="{{ asset('') }}">
         <!-- Custom fonts for this template-->
@@ -15,6 +16,7 @@
         <link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
         <link href="admin/css/my-style.css" rel="stylesheet">
 
+ 
         
     </head>
     <body id="page-top">

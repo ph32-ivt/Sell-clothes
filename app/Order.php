@@ -12,12 +12,12 @@ class Order extends Model
     protected $table = 'orders';
 
     protected $fillable = [
-    	'name', 'telephone', 'address', 'user_id'
+    	'name', 'email', 'telephone', 'address', 'note', 'user_id', 'status'
     ];
 
     protected $dates = ['deleted_at'];
 
-    public function user()
+    public function users()
     {
     	return $this->belongsTo('App\User');
     }

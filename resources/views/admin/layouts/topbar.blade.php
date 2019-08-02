@@ -97,9 +97,9 @@
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    @if(Auth::user()->role_id == 1 && Auth::user()->id == 1)
+                    @if(Auth::user()->role_id == 1)
                         Supper Admin
-                    @elseif(Auth::user()->role_id == 1 && Auth::user()->id != 1)
+                    @elseif(Auth::user()->role_id == 2)
                         Admin
                     @else
                         Member

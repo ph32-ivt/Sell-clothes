@@ -33,7 +33,7 @@
                         <select class="form-control" name="cate_parent" id="cate_parent">
                             <option value="0" disabled selected>Please choose Category Parent</option>
                             @foreach($cate_parent as $cp)
-                                <option value="{{ $cp->id }}">{{ $cp->name }}</option>
+                                <option value="{{ $cp->id }}" {{ old('cate_parent') == $cp->id ? 'selected' : ''}}>{{ $cp->name }}</option>
                             @endforeach
                         </select>
                         @if($errors->has('cate_parent'))
@@ -45,7 +45,7 @@
                         <select class="form-control" name="category_id" id="category_id">
                             <option value="0" disabled selected>Please choose Category Name</option>
                             @foreach($category_id as $cate)
-                                <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                                <option value="{{ $cate->id }}" {{ old('category_id') == $cate->id ? 'selected' : ''}}>{{ $cate->name }}</option>
                             @endforeach
                         </select>
                         @if($errors->has('category_id'))
@@ -81,18 +81,16 @@
                     </div>
                     <div class="form-group">
                         <label for="image">Product Image <span style="color: red">*</span></label>
-                        <input type="file" class="form-control-file" name="image">
+                        <input type="file" class="form-control" name="image">
                         @if($errors->has('image'))
                             <p class="is-danger">{{ $errors->first('image') }}</p>
                         @endif
                     </div>
 
-					@for($i = 1; $i <= 3; $i++)
                     <div class="form-group">
-                        <label for="image_detail[]">Product Image Detail {{ $i }}</label>
-                        <input type="file" class="form-control-file" name="image_detail[]" multiple>
+                        <label for="image_detail[]">Product Image Detail</label>
+                        <input type="file" class="form-control" name="image_detail[]" multiple>
                     </div>
-                    @endfor
 
 				    <button type="submit" class="btn btn-primary">Submit</button>
 				</form>

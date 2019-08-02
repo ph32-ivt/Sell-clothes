@@ -9,7 +9,7 @@ class Size extends Model
     protected $table = 'sizes';
 
     protected $fillable = [
-    	'name', 'quantity'
+    	'name',
     ];
 
     public function products()

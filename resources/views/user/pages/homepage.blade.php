@@ -224,25 +224,24 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
-                            <img src="upload/{{ $item->image }}" alt="IMG-PRODUCT" height="350px">
-                            <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            Quick View
-                            </a>
+                            <div class="ribbon-wrapper"><div class="ribbon sale">{{ $item->status }}</div></div>
+                            <a href="{{ route('product-detail', $item->id) }}">
+                                <img src="upload/{{ $item->image }}" alt="IMG-PRODUCT" height="350px">
+                            </a>   
                         </div>
                         <div class="block2-txt flex-w flex-t p-t-14">
                             <div class="block2-txt-child1 flex-col-l ">
-                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                <a href="{{ route('product-detail', $item->id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                 <h5>{{ $item->name }}</h5>
                                 </a>
                                 <span class="stext-105 cl3">
-                                {{ $item->price }} VNĐ
+                                {{ number_format($item->price) }} VNĐ
                                 </span>
                             </div>
                             <div class="block2-txt-child2 flex-r p-t-3">
-                                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                <a href="{{ route('getaddCart', $item->id) }}" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
                                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-                                        <i class="zmdi zmdi-shopping-cart"></i>
+                                        <a href="{{ route('getaddCart', $item->id) }}"><i class="zmdi zmdi-shopping-cart"></i></a>
                                     </div>
                                 </a>
                             </div>
@@ -258,6 +257,7 @@
                 Load More
                 </a>
             </div>
+
         </div>
     </section>
 @endsection

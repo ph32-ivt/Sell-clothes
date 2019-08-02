@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use App\Category;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -63,8 +64,33 @@ class CategoryController extends Controller
                     echo route('category-list');
             echo"'
             </script>";
-
-        }
-    	
+        }   	
     }
+
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $output = '';
+            $categories = DB::table('categories')->where('name', 'LIKE', '%' . $request->search . '%')->get();
+            if ($categories) {
+                foreach ($categories as $key => $category) {
+                    $output .= '<tr>
+                    <td class="text-center">' . $category->id . '</td>
+                    <td>' . $category->name . '</td>
+                    <td>' . $category->parent_id. '</td>
+                    <td>' . $category->created_at . '</td>
+                    <td>' . $category->updated_at . '</td>
+                    </tr>';
+                }
+            }
+            
+            return Response($output);
+        }
+    }
+
+    public function dashboard()
+    {
+        return view('admin.layouts.dashboard');
+    }
+
 }

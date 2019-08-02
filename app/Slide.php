@@ -9,6 +9,6 @@ class Slide extends Model
     protected $table = 'slides';
 
     protected $fillable = [
-    	'name', 'path'
+    	'name', 'title', 'content', 'link'
     ];
 }

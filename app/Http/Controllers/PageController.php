@@ -7,6 +7,11 @@ use App\Category;
 use App\Product;
 use App\Image;
 use DB;
+use App\Mail\ContactMail;
+use App\Cart;
+use Session;
+use App\Size;
+use App\Comment;
 
 class PageController extends Controller
 {
@@ -29,8 +34,41 @@ class PageController extends Controller
     public function productDetail($id)
     {
     	$product = Product::find($id);
+        $size = Size::all();
     	$img_detail = Image::where('product_id', $id)->get();
     	$relate_product = Product::where('id', '<>', $id)->get();
-    	return view('user.pages.product_detail', compact('product', 'img_detail', 'relate_product'));
+        $comment = Comment::where('product_id', $id)->get();
+    	return view('user.pages.product_detail', compact('product', 'img_detail', 'relate_product', 'size', 'comment'));
     }
+
+    public function comment(Request $request, $id)
+    {
+        $data = $request->all();
+        $data['product_id'] = $id;
+        $comment = Comment::create($data);
+        return back();
+    }
+
+    public function getContact()
+    {
+    	return view('user.pages.contact');
+    }
+
+    public function postContact(Request $request)
+    {
+   		$email = $request->get('email');
+    	$content = $request->get('msg');
+    	\Mail::to($email)->send(new ContactMail($content, $email));
+    	return redirect()->route('getContact');
+    }
+
+    public function search(Request $request)
+    {
+        $result = $request->search;
+        $result = str_replace(' ', '%', $result);
+        $data = Product::where('name', 'like', '%'.$result.'%')->orWhere('price', $result)->get();
+        return view('user.pages.search',compact('data', 'result'));
+    }
+
+    
 }

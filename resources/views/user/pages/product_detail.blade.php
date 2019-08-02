@@ -76,6 +76,8 @@
 							
 							<!--  -->
 							<div class="p-t-33">
+								<form action="{{ route('postaddCart', $product->id) }}" method="POST">
+									@csrf
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-203 flex-c-m respon6">
 										Size
@@ -83,12 +85,11 @@
 
 									<div class="size-204 respon6-next">
 										<div class="rs1-select2 bor8 bg0">
-											<select class="js-select2" name="time">
+											<select class="js-select2" name="size">
 												<option>Choose an option</option>
-												<option>Size S</option>
-												<option>Size M</option>
-												<option>Size L</option>
-												<option>Size XL</option>
+												@foreach($size as $sz)
+												<option value="{{ $sz->name }}">{{ $sz->name }}</option>
+												@endforeach
 											</select>
 											<div class="dropDownSelect2"></div>
 										</div>
@@ -102,18 +103,19 @@
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="qty" value="1">
 
 											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 												<i class="fs-16 zmdi zmdi-plus"></i>
 											</div>
 										</div>
 
-										<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+										<a href="{{ route('postaddCart', $product->id) }}"><button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 											Add to cart
-										</button>
+										</button></a>
 									</div>
 								</div>	
+								</form>
 							</div>
 						</div>
 					</div>
@@ -133,7 +135,7 @@
 							</li>
 
 							<li class="nav-item p-b-10">
-								<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Bình luận (1)</a>
+								<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Bình luận ({{ count($comment) }})</a>
 							</li>
 						</ul>
 
@@ -161,74 +163,48 @@
 										<div class="p-b-30 m-lr-15-sm">
 											<!-- Review -->
 											<div class="flex-w flex-t p-b-68">
-												<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-													<img src="images/avatar-01.jpg" alt="AVATAR">
-												</div>
-
-												<div class="size-207">
+											@foreach($comment as $cm)
+												<div class="size-207" style="margin-bottom: 10px;">
 													<div class="flex-w flex-sb-m p-b-17">
 														<span class="mtext-107 cl2 p-r-20">
-															Ariana Grande
-														</span>
-
-														<span class="fs-18 cl11">
-															<i class="zmdi zmdi-star"></i>
-															<i class="zmdi zmdi-star"></i>
-															<i class="zmdi zmdi-star"></i>
-															<i class="zmdi zmdi-star"></i>
-															<i class="zmdi zmdi-star-half"></i>
+															{{ $cm->name }} 
+															<span class="stext-102 cl6">
+																{{ date('d/m/Y H:i', strtotime($cm->created_at)) }} 
+															</span>
 														</span>
 													</div>
 
-													<p class="stext-102 cl6">
-														Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos
+													<p class="stext-102 cl6" style="margin-top: -5px; margin-left: 25px">
+														{{ $cm->content }}
 													</p>
 												</div>
+											@endforeach
 											</div>
 											
 											<!-- Add review -->
-											<form class="w-full">
+											<form class="w-full" action="{{ route('comment', $product->id) }}" method="POST">
+												@csrf
 												<h5 class="mtext-108 cl2 p-b-7">
-													Add a review
+													Thêm bình luận :
 												</h5>
-
-												<p class="stext-102 cl6">
-													Your email address will not be published. Required fields are marked *
-												</p>
-
-												<div class="flex-w flex-m p-t-50 p-b-23">
-													<span class="stext-102 cl3 m-r-16">
-														Your Rating
-													</span>
-
-													<span class="wrap-rating fs-18 cl11 pointer">
-														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-														<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-														<input class="dis-none" type="number" name="rating">
-													</span>
-												</div>
-
 												<div class="row p-b-25">
 													<div class="col-12 p-b-5">
-														<label class="stext-102 cl3" for="review">Your review</label>
-														<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
+														<label class="stext-102 cl3" for="content">Nội dung</label>
+														<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="content"></textarea>
 													</div>
 
 													<div class="col-sm-6 p-b-5">
-														<label class="stext-102 cl3" for="name">Name</label>
+														<label class="stext-102 cl3" for="name">Tên</label>
 														<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name">
 													</div>
 
 													<div class="col-sm-6 p-b-5">
 														<label class="stext-102 cl3" for="email">Email</label>
-														<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email">
+														<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="email" name="email">
 													</div>
 												</div>
 
-												<button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
+												<button type="submit" class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
 													Submit
 												</button>
 											</form>
@@ -248,9 +224,9 @@
 		<section class="sec-relate-product bg0 p-t-45 p-b-105">
 			<div class="container">
 				<div class="p-b-45">
-					<h3 class="ltext-106 cl5 txt-center">
-						Related Products
-					</h3>
+					<h2 class="text-center">
+						Sản phẩm liên quan
+					</h2>
 				</div>
 
 				<!-- Slide2 -->
@@ -261,16 +237,15 @@
 							<!-- Block2 -->
 							<div class="block2">
 								<div class="block2-pic hov-img0">
-									<img src="upload/{{ $relate->image }}" alt="IMG-PRODUCT" height="300">
-
-									<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-										Quick View
+									<div class="ribbon-wrapper"><div class="ribbon sale">{{ $relate->status }}</div></div>
+									<a href="{{ route('product-detail', $relate->id) }}">
+										<img src="upload/{{ $relate->image }}" alt="IMG-PRODUCT" height="300">
 									</a>
 								</div>
 
 								<div class="block2-txt flex-w flex-t p-t-14">
 									<div class="block2-txt-child1 flex-col-l ">
-										<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+										<a href="{{ route('product-detail', $relate->id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 											{{ $relate->name }}
 										</a>
 
@@ -280,9 +255,11 @@
 									</div>
 
 									<div class="block2-txt-child2 flex-r p-t-3">
-										<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+										<a href="{{ route('getaddCart', $relate->id) }}" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 			                              	<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-						                        <i class="zmdi zmdi-shopping-cart"></i>
+						                        <a href="{{ route('getaddCart', $relate->id) }}">
+						                        	<i class="zmdi zmdi-shopping-cart"></i>
+						                        </a>
 						                    </div>
 		                                </a>
 									</div>
@@ -295,4 +272,7 @@
 			</div>
 		</section>
 	</div>
+
+
+	
 @endsection

@@ -9,7 +9,7 @@ class Comment extends Model
     protected $table = 'comments';
 
     protected $fillable = [
-    	'title', 'rate', 'content', 'status', 'product_id'
+    	'name', 'email', 'content', 'product_id'
     ];
 
     public function product()

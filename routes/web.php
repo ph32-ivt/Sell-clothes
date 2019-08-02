@@ -23,8 +23,13 @@ Route::get('page', function() {
 
 Route::prefix('admin')->group(function () {
 	Route::group(['middleware' => ['auth']], function () {
+
+
 	    // Matches The "/admin/users" URL
 	    Route::prefix('category')->group(function () {
+
+	    	// DashBoard
+	    	Route::get('dashboard', 'CategoryController@dashboard')->name('dashboard');
 
 	    	// List Category
 		    Route::get('/', 'CategoryController@index')->name('category-list');
@@ -39,6 +44,9 @@ Route::prefix('admin')->group(function () {
 
 		    // Delete category
 		    Route::get('delete/{id}', 'CategoryController@delete')->name('category-delete');
+
+		    //Search Category
+		    Route::get('search', 'CategoryController@search')->name('category-search');
 		});
 
 
@@ -84,6 +92,38 @@ Route::prefix('admin')->group(function () {
 		    // Delete User
 		    Route::get('delete/{id}', 'UserController@delete')->name('user-delete');
 		});
+
+		// Modal Order
+		Route::prefix('order')->group(function () {
+
+	    	// List User
+		    Route::get('/', 'OrderController@index')->name('order-list');
+
+		    // Edit User
+		    Route::get('edit/{id}', 'OrderController@edit')->name('order-edit');
+		    Route::post('edit/{id}', 'OrderController@update')->name('order-update');
+
+		    // Delete User
+		    Route::get('delete/{id}', 'OrderController@delete')->name('order-delete');
+		});
+
+		// Modal Slide
+		Route::prefix('slide')->group(function () {
+
+	    	// List User
+		    Route::get('/', 'SlideController@index')->name('slide-list');
+
+		    // Create User
+		    Route::get('create', 'SlideController@create')->name('slide-create');
+		    Route::post('create', 'SlideController@store')->name('slide-store');
+
+		    // Edit User
+		    Route::get('edit/{id}', 'SlideController@edit')->name('slide-edit');
+		    Route::post('edit/{id}', 'SlideController@update')->name('slide-update');
+
+		    // Delete User
+		    Route::get('delete/{id}', 'SlideController@delete')->name('slide-delete');
+		});
 	});	
 });
 
@@ -106,11 +146,32 @@ Route::get('auth/logout', 'Auth\LoginController@getLogout')->name('getLogout');
 ////////////////////////////////////
 
 
-Route::prefix('users')->group(function () {
-	// Homapage
-    Route::get('homepage', 'PageController@index')->name('homepage');
-    // Product Type
-    Route::get('product-type/{id}', 'PageController@productType')->name('product-type');
-    // Product Detail
-    Route::get('product-detail/{id}', 'PageController@productDetail')->name('product-detail');
-});
+
+// Homapage
+Route::get('homepage', 'PageController@index')->name('homepage');
+// Product Type
+Route::get('product-type/{id}', 'PageController@productType')->name('product-type');
+// Product Detail
+Route::get('product-detail/{id}', 'PageController@productDetail')->name('product-detail');
+Route::post('product-detail/{id}', 'PageController@comment')->name('comment');
+// Contact
+Route::get('contact', 'PageController@getContact')->name('getContact');
+Route::post('contact', 'PageController@postContact')->name('postContact');
+// Search 
+Route::get('search', 'PageController@search')->name('search');
+
+
+
+// Add Cart
+Route::get('add-cart/{id}', 'CartController@getaddCart')->name('getaddCart');
+Route::post('add-cart/{id}', 'CartController@postaddCart')->name('postaddCart');
+// View Cart
+Route::get('view-cart', 'CartController@viewCart')->name('viewCart');
+// Update Cart
+Route::get('cart/update', 'CartController@getUpdateCart')->name('getUpdateCart');
+// Delete Cart
+Route::get('cart/delete/{id}', 'CartController@deleteCart')->name('deleteCart');
+// Check Out
+Route::get('checkout', 'CartController@checkout')->name('form-checkout');
+Route::post('checkout', 'CartController@postCheckout')->name('postCheckout');
+

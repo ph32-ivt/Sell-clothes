@@ -40,9 +40,7 @@
     <body class="animsition">
         <!-- Header -->
         @include('user.layouts.header')
-        <!-- Cart -->
-        @include('user.layouts.cart')
-
+        
 
         <!-- Content -->
         @yield('content')
@@ -60,8 +58,6 @@
             </span>
         </div>
 
-        <!-- Modal1 -->
-        @include('user.layouts.modal-product-detail')
         <!--===============================================================================================-->	
         <script src="user/vendor/jquery/jquery-3.2.1.min.js"></script>
         <!--===============================================================================================-->
@@ -163,5 +159,6 @@
         </script>
         <!--===============================================================================================-->
         <script src="user/js/main.js"></script>
+        <script src="admin/js/my-script.js"></script>
     </body>
 </html>

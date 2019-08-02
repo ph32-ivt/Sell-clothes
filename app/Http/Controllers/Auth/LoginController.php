@@ -63,14 +63,8 @@ class LoginController extends Controller
                 return redirect()->back()->with(['type_message' => 'danger', 'flash_message' => 'Email or Password is not correct !']);
             }
         } else {
-            return redirect()->back()->with(['type_message' => 'danger', 'flash_message' => 'Password is not correct !']);
-        }
-        // if (Auth::attempt($login)) {
-        //     return redirect()->route('product-list');
-        // } else {
-        //     return redirect()->back()->with(['type_message' => 'danger', 'flash_message' => 'Password is not correct !']);
-        // }
-        
+            return redirect()->back()->with(['type_message' => 'danger', 'flash_message' => 'You don\'t have permission access this page !']);
+        }       
     }
 
     public function getRegister()
@@ -92,14 +86,13 @@ class LoginController extends Controller
         //     'gender'    => $request->gender
         // ]);
         $register = User::create($data);
-        // $register->create($data);
         return redirect()->route('getLogin')->with(['type_message' => 'success', 'flash_message' => 'Success ! Complete create username']);
     }
 
     public function getLogout()
     {
         Auth::logout();
-        return redirect('auth/login');
+        return redirect('homepage');
         // return redirect(\URL::previous());
     }
 
