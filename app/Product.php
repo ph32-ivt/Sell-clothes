@@ -34,11 +34,6 @@ class Product extends Model
     	return $this->hasMany('App\Image');
     }
 
-    public function promotions()
-    {
-    	return $this->belongsToMany('App\Promotion');
-    }
-
     public function sizes()
     {
     	return $this->belongsToMany('App\Size');

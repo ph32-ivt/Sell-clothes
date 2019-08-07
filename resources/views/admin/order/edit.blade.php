@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('content')
-	<h1 class="h3 mb-2 text-gray-800 text-center" style="padding-bottom: 20px;">Chi tiết đơn hàng</h1>
+	<h1 class="h3 mb-2 text-gray-800 text-center" style="padding-bottom: 20px;">Chi tiết Đơn hàng</h1>
 	<section class="content">
         <!-- Default box -->
         <div class="box">
@@ -85,11 +85,11 @@
                 <form action="{{ route('order-update', $order->id) }}" method="POST">
                     
                     {{ csrf_field() }}
-                    <div class="col-md-8"></div>
-                    <div class="col-md-4">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
                         <div class="form-inline">
-                            <label>Trạng thái giao hàng: </label>
-                            <select name="status" class="form-control input-inline" style="width: 200px">
+                            <label><strong>Trạng thái giao hàng: </strong></label>
+                            <select name="status" class="form-control input-inline" style="width: 200px; margin: 20px 20px">
                                 <option value="Chưa giao">Chưa giao</option>
                                 <option value="Đang giao">Đang giao</option>
                                 <option value="Đã giao">Đã giao</option>

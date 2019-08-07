@@ -5,18 +5,16 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Categories
+                    Danh mục
                 </h1>
                 <ol class="breadcrumb">
                     <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.html">Categories</a>
+                        <i class="fa fa-dashboard"></i>  <a href="index.html">Danh mục</a>
                     </li>
                     <li class="active">
-                        <i class="fa fa-edit"></i> Edit
+                        <i class="fa fa-edit"></i> Sửa
                     </li>
                 </ol>
-                <!-- Thông báo lỗi -->
-                {{-- @include('admin.blocks.error') --}}
 
             </div>
         </div>
@@ -29,21 +27,21 @@
 					@csrf
 					@method('POST')
                     <div class="form-group">
-                        <label for="parent_id">Parent_Id</label>
+                        <label for="parent_id">Danh mục lớn</label>
                         <select name="parent_id" class="form-control">
-                            <option value="0" disabled="disabled">Please Choose Category</option>
+                            <option value="0" disabled="disabled">Vui lòng chọn Danh mục</option>
                             <?php edit_category_parent($cate_parent, 0, "--", $category['parent_id']) ?>
                         </select>
                     </div>
 				    <div class="form-group">
-				        <label for="name">Name</label>
-				        <input name="name" type="text" class="form-control" placeholder="Enter category name" value="{{ $category['name'] }}">
+				        <label for="name">Tên danh mục </label>
+				        <input name="name" type="text" class="form-control" placeholder="Nhập tên danh mục" value="{{ $category['name'] }}">
                         @if($errors->has('name'))
                             <p class="is-danger">{{ $errors->first('name') }}</p>
                         @endif
 				    </div>
 
-				    <button type="submit" class="btn btn-primary">Submit</button>
+				    <button type="submit" class="btn btn-primary">Cập nhật</button>
 				</form>
 
             </div>

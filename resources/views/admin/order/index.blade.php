@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 @section('content')
 	<!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800 text-center">List Categories</h1>
+    <h1 class="h3 mb-2 text-gray-800 text-center">Danh sách Đơn hàng</h1>
     <!-- DataTales Example -->
 
     <div class="col-lg-12">
@@ -13,6 +13,20 @@
     </div>
 
     <div class="card shadow mb-4">
+        <div class="col-md-6">
+            <form action="" class="form-inline" style="margin-top: 20px; margin-left: 20px">
+                
+                <div class="form-group mb-2">
+                    <input class="form-control" type="text" placeholder="Nhập từ khóa..." aria-label="Search" name="search" value="{{ \Request::get('name') }}">
+                </div>
+                <div class="form-group mb-2">
+                    <button class="btn btn-info" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+                
+            </form>
+        </div>
         <div class="card-body">
             <div class="table-responsive">
 

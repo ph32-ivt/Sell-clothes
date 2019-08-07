@@ -44,7 +44,7 @@
                 </div>
             @endif
             <form action="{{-- {{ route('postLogin') }} --}}" method="post">
-                <h2 class="text-center">Login</h2>
+                <h2 class="text-center">Đăng nhập</h2>
                 <!-- Message Error -->
                 @csrf
                 {{-- @include('admin.blocks.error') --}}
@@ -56,20 +56,20 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <input name="password" type="password" class="form-control" placeholder="Password">
+                    <input name="password" type="password" class="form-control" placeholder="Mật khẩu">
                     @if($errors->has('password'))
                         <p class="is-danger">{{ $errors->first('password') }}</p>
                     @endif
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                    <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
                 </div>
                 <div class="clearfix">
-                    <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
-                    <a href="#" class="pull-right">Forgot Password?</a>
+                    <label class="pull-left checkbox-inline"><input type="checkbox"> Nhớ mật khẩu</label>
+                    <a href="#" class="pull-right">Quên mật khẩu?</a>
                 </div>
             </form>
-            <p class="text-center"><a href="#">Create an Account</a></p>
+            <p class="text-center"><a href="{{ route('getRegister') }}">Tạo tài khoản mới</a></p>
         </div>
     </body>
 </html>

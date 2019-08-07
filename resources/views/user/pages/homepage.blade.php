@@ -1,20 +1,53 @@
 @extends('user.layouts.master')
-@section('content')
+@section('content')  
+
+<script>
+//     $(document).ready(function(){
+ 
+//      var _token = $('input[name="_token"]').val();
+
+//      load_data('', _token);
+
+//      function load_data(id="", _token)
+//      {
+//       $.ajax({
+//        url:"{ route('load_data') ",
+//        method:"POST",
+//        data:{id:id, _token:_token},
+//        success:function(data)
+//        {
+//         $('#load_more_button').remove();
+//         $('#post_data').append(data);
+//        }
+//       })
+//      }
+
+//      $(document).on('click', '#load_more_button', function(){
+//       var id = $(this).data('id');
+//       $('#load_more_button').html('<b>Loading...</b>');
+//       load_data(id, _token);
+//      });
+
+//      $.ajaxSetup({ headers: { 'csrftoken' : '{ csrf_token() }}' } });
+// });
+    
+</script>
 	<!-- Slider -->
     <section class="section-slide">
         <div class="wrap-slick1">
             <div class="slick1">
-                <div class="item-slick1" style="background-image: url(user/images/slide-01.jpg);">
+                @foreach($slides as $slide)
+                <div class="item-slick1" style="background-image: url(upload/slides/{{ $slide->name }});">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
                                 <span class="ltext-101 cl2 respon2">
-                                Women Collection 2018
+                                {{ $slide->title }}
                                 </span>
                             </div>
                             <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
                                 <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                    NEW SEASON
+                                    {{ $slide->content }}
                                 </h2>
                             </div>
                             <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
@@ -25,48 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="item-slick1" style="background-image: url(user/images/slide-02.jpg);">
-                    <div class="container h-full">
-                        <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                            <div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
-                                <span class="ltext-101 cl2 respon2">
-                                Men New-Season
-                                </span>
-                            </div>
-                            <div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
-                                <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                    Jackets & Coats
-                                </h2>
-                            </div>
-                            <div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-                                <a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                Shop Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-slick1" style="background-image: url(user/images/slide-03.jpg);">
-                    <div class="container h-full">
-                        <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                            <div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
-                                <span class="ltext-101 cl2 respon2">
-                                Men Collection 2018
-                                </span>
-                            </div>
-                            <div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
-                                <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                    New arrivals
-                                </h2>
-                            </div>
-                            <div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
-                                <a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                Shop Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -151,7 +143,7 @@
             <div class="flex-w flex-sb-m p-b-52">
                 <div class="flex-w flex-l-m filter-tope-group m-tb-10">
                     <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-                    All Products
+                    Tất cả
                     </button>
                     @foreach($category as $cate)
 	                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".{{ $cate->id }}">
@@ -159,105 +151,58 @@
 	                    </button>
                     @endforeach
                 </div>
-                <div class="flex-w flex-c-m m-tb-10 flex-r-m wrap-icon-header">
-                    <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
-                        <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
-                        <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-                        Filter
-                    </div>
-                    <div class="bor17 of-hidden pos-relative">
-						<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+            </div>
 
-						<button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-							<i class="zmdi zmdi-search"></i>
-						</button>
-					</div>
-                </div>
-                <!-- Filter -->
-                <div class="dis-none panel-filter w-full p-t-10">
-                    <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-                        <div class="filter-col1 p-r-15 p-b-27">
-                            <div class="mtext-102 cl2 p-b-15">
-                                Sort By
+            <div id="load-data" class="row isotope-grid">
+                {{ csrf_field() }}
+                @foreach($product as $item)	
+                    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{ $item->cate_parent }}">
+                        <!- Block2 ->
+                        <div class="block2">
+                            <div class="block2-pic hov-img0">
+                                @if($item->status == 'Sale')
+                                    <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
+                                @endif
+                                <a href="{{ route('product-detail', $item->id) }}">
+                                    <img src="upload/{{ $item->image }}" alt="IMG-PRODUCT" height="350px">
+                                </a>   
                             </div>
-                            <ul>
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                    Price: Low to High
+                            <div class="block2-txt flex-w flex-t p-t-14">
+                                <div class="block2-txt-child1 flex-col-l ">
+                                    <a href="{{ route('product-detail', $item->id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                    <h5>{{ $item->name }}</h5>
                                     </a>
-                                </li>
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                    Price: High to Low
+                                    <span class="stext-105 cl3">
+                                    {{ number_format($item->price) }} VNĐ
+                                    </span>
+                                </div>
+                                <div class="block2-txt-child2 flex-r p-t-3">
+                                    <a href="{{ route('getaddCart', $item->id) }}" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+                                            <a href="{{ route('getaddCart', $item->id) }}"><i class="zmdi zmdi-shopping-cart"></i></a>
+                                        </div>
                                     </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="filter-col2 p-r-15 p-b-27">
-                            <div class="mtext-102 cl2 p-b-15">
-                                Price
-                            </div>
-                            <ul>
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                    All
-                                    </a>
-                                </li>
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                    $0.00 - $50.00
-                                    </a>
-                                </li>
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                    $50.00 - $100.00
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row isotope-grid">
-            @foreach($product as $item)	
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{ $item->cate_parent }}">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <div class="ribbon-wrapper"><div class="ribbon sale">{{ $item->status }}</div></div>
-                            <a href="{{ route('product-detail', $item->id) }}">
-                                <img src="upload/{{ $item->image }}" alt="IMG-PRODUCT" height="350px">
-                            </a>   
-                        </div>
-                        <div class="block2-txt flex-w flex-t p-t-14">
-                            <div class="block2-txt-child1 flex-col-l ">
-                                <a href="{{ route('product-detail', $item->id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                <h5>{{ $item->name }}</h5>
-                                </a>
-                                <span class="stext-105 cl3">
-                                {{ number_format($item->price) }} VNĐ
-                                </span>
-                            </div>
-                            <div class="block2-txt-child2 flex-r p-t-3">
-                                <a href="{{ route('getaddCart', $item->id) }}" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-                                        <a href="{{ route('getaddCart', $item->id) }}"><i class="zmdi zmdi-shopping-cart"></i></a>
-                                    </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
-            </div>
+                    <?php $last_id = $item->id ?>
+                    
+                @endforeach
             
-            <!-- Load more -->
-            <div class="flex-c-m flex-w w-full p-t-45">
-                <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-                Load More
-                </a>
             </div>
+            <!- Load more ->
+            <div id="load_more" class="flex-c-m flex-w w-full p-t-45">
+                <button id="load_more_button" name="load_more_button" data-id="{{ $last_id }}" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+                Load More
+                </button>
 
+            </div>
+            <div class="col-md-4" style="margin: 0 auto">
+                <div class="row">{{ $product->links() }}</div>
+            </div>
         </div>
     </section>
 @endsection
+
+

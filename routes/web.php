@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('hom', function () {
     return view('welcome');
 })->name('home');
 
@@ -46,7 +46,7 @@ Route::prefix('admin')->group(function () {
 		    Route::get('delete/{id}', 'CategoryController@delete')->name('category-delete');
 
 		    //Search Category
-		    Route::get('search', 'CategoryController@search')->name('category-search');
+		    // Route::get('search', 'CategoryController@search')->name('category-search');
 		});
 
 
@@ -148,7 +148,7 @@ Route::get('auth/logout', 'Auth\LoginController@getLogout')->name('getLogout');
 
 
 // Homapage
-Route::get('homepage', 'PageController@index')->name('homepage');
+Route::get('/', 'PageController@index')->name('homepage');
 // Product Type
 Route::get('product-type/{id}', 'PageController@productType')->name('product-type');
 // Product Detail
@@ -158,7 +158,10 @@ Route::post('product-detail/{id}', 'PageController@comment')->name('comment');
 Route::get('contact', 'PageController@getContact')->name('getContact');
 Route::post('contact', 'PageController@postContact')->name('postContact');
 // Search 
-Route::get('search', 'PageController@search')->name('search');
+Route::post('search', 'PageController@search')->name('search');
+// Load more
+Route::post('loadmore', 'PageController@load_data')->name('load_data');
+
 
 
 

@@ -3,7 +3,7 @@
 	<!-- Title page -->
 	<section class="bg-img1 txt-center p-lr-15 p-tb-92 container-wrap" style="background-image: url('user/images/bg-01.jpg');">
 		<h2 class="ltext-105 cl0 txt-center">
-			Contact
+			Liên hệ
 		</h2>
 	</section>	
 
@@ -27,16 +27,16 @@
 						</h4>
 
 						<div class="bor8 m-b-20 how-pos4-parent">
-							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="Your Email Address">
+							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="Địa chỉ email của bạn">
 							<img class="how-pos4 pointer-none" src="user/images/icons/icon-email.png" alt="ICON">
 						</div>
 
 						<div class="bor8 m-b-30">
-							<textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="msg" placeholder="How Can We Help?"></textarea>
+							<textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="msg" placeholder="Chúng tôi có thể giúp gì cho bạn?"></textarea>
 						</div>
 
 						<button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-							Submit
+							Gửi
 						</button>
 					</form>
 				</div>

@@ -1,3 +1,7 @@
 .is-danger {
   color: red;
  }
+.txt-color {
+	color: blue;
+	font-size: 130%;
+}

@@ -2,7 +2,7 @@
 @section('content')
     
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800 text-center">List Categories</h1>
+    <h1 class="h3 mb-2 text-gray-800 text-center">Danh sách người dùng</h1>
     <!-- DataTales Example -->
 
     <div class="col-lg-12">
@@ -16,7 +16,32 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row" style="float: right; margin-right: 20px;">
-                <a class="btn btn-primary" href="{{ route('user-create') }}">Add New</a>
+                <a class="btn btn-primary" href="{{ route('user-create') }}">Thêm mới</a>
+            </div>
+            <!-- Search  -->
+            <div class="col-md-6">
+                <form action="" class="form-inline" style="margin-top: 20px; margin-left: 20px">
+                    
+                    <div class="form-group mb-2">
+                        <input class="form-control" type="text" placeholder="Nhập từ khóa..." aria-label="Search" name="search" value="{{ \Request::get('name') }}">
+                    </div>
+                    <div class="form-group mb-2" style="margin:0 20px; padding: 5px">
+                        <select name="role" id="" class="form-control">
+                            <option value="" disabled selected>Level</option>
+                            @if(isset($roles))
+                                @foreach($roles as $role)
+                                <option value="{{ $role->id }}" {{ \Request::get('role') == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <button class="btn btn-info" type="submit">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                    
+                </form>
             </div>
         </div>
         <div class="card-body">
@@ -26,11 +51,11 @@
                     <thead>
                         <tr class="text-center">
                             <th>#</th>
-                            <th>Name</th>
+                            <th>Tên người dùng</th>
                             <th>Email</th>
-                            <th>Telephone</th>
-                            <th>Address</th>
-                            <th>Gender</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>
+                            <th>Giới tính</th>
                             <th>Level</th>
                             <th colspan="2">Action</th>
                         </tr>
@@ -55,18 +80,11 @@
                                 @endif
                             </td>
                             <td>
-                                 {{-- ?php $role = DB::table('roles')->where('id', $user->role_id)->first(); echo $role->name; ?> --}}
-                                @if ($user->role_id == 1 && $user->id == 1)
-                                    Supper Admin
-                                @elseif ($user->role_id == 1)
-                                    Admin
-                                @else
-                                    Member
-                                @endif
+                                 <?php $role = DB::table('roles')->where('id', $user->role_id)->first(); echo $role->name; ?>
                             </td>
                             <td>
-                                <a class="btn btn-primary" href="{{ route('user-edit', $user->id) }}">Edit</a>
-                                <a class="btn btn-danger" onclick="return accessDelete('Bạn có chắc là muốn xóa không ?')" href="{{ route('user-delete', $user->id) }}">Delete</a>
+                                <a class="btn btn-primary" href="{{ route('user-edit', $user->id) }}">Sửa</a>
+                                <a class="btn btn-danger" onclick="return accessDelete('Bạn có chắc là muốn xóa không ?')" href="{{ route('user-delete', $user->id) }}">Xóa</a>
                             </td>
                         </tr>
                     @endforeach

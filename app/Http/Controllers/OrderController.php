@@ -10,9 +10,16 @@ use Cart;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-    	$order = DB::table('orders')->where('deleted_at', null)->orderBy('id', 'DESC')->get();
+    	$order = DB::table('orders');
+        if($request->search) {
+            $order = $order->where('name', 'LIKE', '%'.$request->search.'%')
+                            ->orWhere('email', 'LIKE', '%'.$request->search.'%')
+                            ->orWhere('address', 'LIKE', '%'.$request->search.'%')
+                            ->orWhere('status', 'LIKE', '%'.$request->search.'%');
+        }
+        $order = $order->where('deleted_at', null)->orderBy('id', 'DESC')->paginate(10);
     	return view('admin.order.index', compact('order'));
     }
 

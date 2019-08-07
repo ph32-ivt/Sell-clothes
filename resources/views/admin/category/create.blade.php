@@ -5,14 +5,14 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Category <small style="font-size: 60%; color: blue;">Add</small>
+                    Danh mục <small style="font-size: 60%; color: blue;">Thêm</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                        <i class="fa fa-dashboard"></i>  <a href="index.html">Tổng quan</a>
                     </li>
                     <li class="active">
-                        <i class="fa fa-edit"></i> Forms
+                        <i class="fa fa-edit"></i> Danh mục
                     </li>
                 </ol>
             </div>
@@ -30,31 +30,24 @@
 					@method('POST')
 				    
 				    <div class="form-group">
-				        <label for="parent_id">Category Parent</label>
+				        <label for="parent_id">Danh mục lớn</label>
                         <select name="parent_id" class="form-control">
-                            <option value="0">Please Choose Category</option>
-                            <?php category_parent($cate_parent); ?>
+                            <option value="0">Vui lòng chọn danh mục</option>
+                            @foreach($cate_parent as $value)
+                            <option {{ old('parent_id') == $value->id ? 'selected' : '' }} value="{{ $value->id }}">{{ $value->name }}</option>
+                            @endforeach
                         </select>
 				    </div>
 
                     <div class="form-group">
-                        <label for="name">Category Name <span style="color: red">*</span></label>
-                        <input name="name" type="text" class="form-control" placeholder="Enter category name" value="{{ old('name') }}">
+                        <label for="name">Tên Danh mục <span style="color: red">*</span></label>
+                        <input name="name" type="text" class="form-control" placeholder="Nhập tên Danh mục" value="{{ old('name') }}">
                         @if($errors->has('name'))
                             <p class="is-danger">{{ $errors->first('name') }}</p>
                         @endif
                     </div>
 
-					{{-- <div class="form-group">
-					    <label for="paren_id[]">Parent_Id</label>
-					    <select class="form-control" name="paren_id[]">
-					    	@foreach($listCategory as $category)
-					        	<option value="{{ $category->id }}">{{ $category->paren_id }}</option>
-							@endforeach
-					    </select>
-					</div> --}}
-
-				    <button type="submit" class="btn btn-primary">Submit</button>
+				    <button type="submit" class="btn btn-primary">Thêm</button>
 				</form>
 
             </div>

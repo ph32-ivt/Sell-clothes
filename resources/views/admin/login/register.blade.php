@@ -106,12 +106,12 @@
     <body>
         <div class="signup-form">
             <form action="{{ route('postRegister') }}" method="post">
-                <h2>Register</h2>
+                <h2>Đăng kí</h2>
                 @csrf
                 {{-- @include('admin.blocks.error') --}}
-                <p class="hint-text">Create your account. It's free and only takes a minute.</p>
+                <p class="hint-text">Tạo một tài khoản mới. Nó miễn phí và chỉ mất vài phút.</p>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="name" placeholder="Username" value="{{ old('name') }}">
+                    <input type="text" class="form-control" name="name" placeholder="Tên người dùng" value="{{ old('name') }}">
                     @if($errors->has('name'))
                         <p class="is-danger">{{ $errors->first('name') }}</p>
                     @endif
@@ -123,32 +123,32 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="password" placeholder="Password">
+                    <input type="password" class="form-control" name="password" placeholder="Mật khẩu">
                     @if($errors->has('password'))
                         <p class="is-danger">{{ $errors->first('password') }}</p>
                     @endif
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="re-password" placeholder="Confirm Password">
+                    <input type="password" class="form-control" name="re-password" placeholder="Nhập lại mật khẩu">
                     @if($errors->has('re-password'))
                         <p class="is-danger">{{ $errors->first('re-password') }}</p>
                     @endif
                 </div>
                 <div class="form-group">
-                    <input name="telephone" type="text" class="form-control" placeholder="Enter your telephone" value="{{ old('telephone') }}">
+                    <input name="telephone" type="text" class="form-control" placeholder="Nhập số điện thoại" value="{{ old('telephone') }}">
                     @if($errors->has('telephone'))
                         <p class="is-danger">{{ $errors->first('telephone') }}</p>
                     @endif
                 </div>
                 <div class="form-group">
-                    <input name="address" type="text" class="form-control" placeholder="Enter your address" value="{{ old('address') }}">
+                    <input name="address" type="text" class="form-control" placeholder="Nhập địa chỉ" value="{{ old('address') }}">
                     @if($errors->has('address'))
                         <p class="is-danger">{{ $errors->first('address') }}</p>
                     @endif
-                    <input type="hidden" name="role_id" value="2">
+                    <input type="hidden" name="role_id" value="3">
                 </div>
                 <div class="form-group">
-                    <label>Gender :</label>
+                    <label>Giới tính :</label>
                     <label for="" class="radio-inline">
                         <input name="gender" value="1" checked type="radio">
                         Nam
@@ -162,10 +162,10 @@
                     <label class="checkbox-inline"><input type="checkbox"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+                    <button type="submit" class="btn btn-success btn-lg btn-block">Đăng kí</button>
                 </div>
             </form>
-            <div class="text-center">Already have an account? <a href="#">Sign in</a></div>
+            <div class="text-center">Bạn đã có tài khoản ? <a href="{{ route('getLogin') }}">Đăng nhập</a></div>
         </div>
     </body>
 </html>

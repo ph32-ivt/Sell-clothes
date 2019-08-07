@@ -28,14 +28,14 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Products
+                    Sản phẩm
                 </h1>
                 <ol class="breadcrumb">
                     <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                        <i class="fa fa-dashboard"></i>  <a href="index.html">Tổng quan</a>
                     </li>
                     <li class="active">
-                        <i class="fa fa-edit"></i> Products
+                        <i class="fa fa-edit"></i> Sản phẩm
                     </li>
                 </ol>
                 <!-- Message Error -->
@@ -52,18 +52,18 @@
 					@method('POST')
                     
                     <div class="form-group">
-                        <label for="cate_parent">Category Parent</label>
+                        <label for="cate_parent">Danh mục lớn</label>
                         <select class="form-control" name="cate_parent" id="cate_parent">
-                            <option value="0" disabled selected>Please choose Category Parent</option>
+                            <option value="0" disabled selected>Vui lòng chọn danh mục</option>
                             @foreach($cate_parent as $cp)
                                 <option {{ $product->cate_parent == $cp->id ? 'selected' : '' }} value="{{ $cp->id }}">{{ $cp->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="category_id">Category Name</label>
+                        <label for="category_id">Danh mục</label>
                         <select class="form-control" name="category_id" id="category_id">
-                            <option value="0" disabled selected>Please choose Category Name</option>
+                            <option value="0" disabled selected>Vui lòng chọn danh mục</option>
                             @foreach($category_id as $cate)
                                 <option {{ $product->category_id == $cate->id ? 'selected' : '' }} value="{{ $cate->id }}">{{ $cate->name }}</option>
                             @endforeach
@@ -71,33 +71,33 @@
                     </div>
 
 				    <div class="form-group">
-				        <label for="name">Product Name</label>
+				        <label for="name">Tên sản phẩm</label>
 				        <input name="name" type="text" class="form-control" placeholder="Enter product name" value="{{ $product->name }}">
 				    </div>
 				    <div class="form-group">
-				        <label for="status">Status</label>
+				        <label for="status">Trạng thái</label>
 				        <input name="status" type="text" class="form-control" placeholder="Enter status" value="{{ $product->status }}">
 				    </div>
                     <div class="form-group">
-                        <label for="price">Price</label>
-                        <input name="price" type="text" class="form-control" placeholder="Enter price" value="{{ $product->price }}">
+                        <label for="price">Giá (VND)</label>
+                        <input name="price" type="text" class="form-control" placeholder="Enter price" value="{{ $product->price }}"> 
                     </div>
                     <div class="form-group">
-                        <label for="description">Description</label>
+                        <label for="description">Mô tả</label>
                         <textarea class="form-control" name="description" rows="3" placeholder="Enter description here">{{ $product->description }}</textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="image_current">Image Current :</label><br>
+                        <label for="image_current">Hình hiện tại :</label><br>
                         <img name="image_current" src="upload/{{ $product->image }}" alt="" width="150px">
                     </div>
                     <div class="form-group">
-                        <label for="image">Product Image</label>
+                        <label for="image">Thêm hình sản phẩm</label>
                         <input type="file" class="form-control-file" name="image" value="{{ $product->image }}">
                         <input type="hidden" name="img_current" value="{{ $product->image }}">
                     </div>
                     <div class="form-group">
-                        <label for="img_detail">Image Detail Current :</label><br>
+                        <label for="img_detail">Hình chi tiết hiện tại :</label><br>
                         @foreach($product_img as $key => $item)
                         <div id="{{ $key }}" style="float: left; margin-top: 10px;">
                             <img class="img_detail" src="upload/detail/{{ $item->name }}" alt="" width="150px" height="200px" idHinh="{{ $item->id }}" id="{!! $key !!}">
@@ -105,11 +105,11 @@
                         </div>                          
                         @endforeach
                         <div class="clear"></div>
-                        <button type="button" class="btn btn-warning" id="addImages">Add Images</button>
+                        <button type="button" class="btn btn-warning" id="addImages">Thêm ảnh</button>
                         <div id="insert"></div> 
                     </div>
 
-				    <button type="submit" class="btn btn-primary">Submit</button>
+				    <button type="submit" class="btn btn-primary">Cập nhật</button>
 				</form>
 
             </div>

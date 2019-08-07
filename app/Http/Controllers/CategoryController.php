@@ -5,20 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use App\Category;
+use App\Order;
+use App\Product;
+use App\Comment;
+use App\User;
 use DB;
 
 class CategoryController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
-    	$listCategory = Category::all();
+    	$listCategory = DB::table('categories');
+        if($request->search) {
+            $listCategory = $listCategory->where('name', 'LIKE', '%'.$request->search.'%');
+        }
+        $listCategory = $listCategory->orderBy('id', 'DESC')->paginate(10);
     	return view('admin.category.index', compact('listCategory'));
     }
 
     public function create()
     {
-    	$cate_parent = Category::all()->toArray();
+    	$cate_parent = Category::where('parent_id', 0)->get();
     	return view('admin.category.create', compact('cate_parent'));
     }
 
@@ -28,7 +36,7 @@ class CategoryController extends Controller
             'name'      => $request->name,
             'parent_id' => $request->parent_id
     	]);
-    	return redirect()->route('category-list')->with([ 'type_message' => 'success', 'flash_message' => 'Bạn đã thêm category thành công !' ]);
+    	return redirect()->route('category-list')->with([ 'type_message' => 'success', 'flash_message' => 'Bạn đã thêm Danh mục thành công !' ]);
     }
 
     public function edit($id)
@@ -42,12 +50,12 @@ class CategoryController extends Controller
     {
         $this->validate($request,
             ["name" => "required"],
-            ['name.required' => "Please enter Name Category !"]
+            ['name.required' => "Vui lòng nhập tên Danh mục !"]
         );
     	$category = Category::find($id);
     	$data = $request->all();
     	$category->update($data);
-    	return redirect()->route('category-list')->with(['type_message' => 'success', 'flash_message' => 'Bạn đã sửa Category thành công !']);
+    	return redirect()->route('category-list')->with(['type_message' => 'success', 'flash_message' => 'Bạn đã sửa Danh mục thành công !']);
     }
 
     public function delete($id)
@@ -59,7 +67,7 @@ class CategoryController extends Controller
             return redirect()->route('category-list')->with(['type_message' => 'success', 'flash_message' => 'Bạn đã xóa thành công !']);
         } else {
             echo "<script type='text/javascript'>
-                alert('Sorry ! You can not Delete this Category');
+                alert('Xin lỗi ! Bạn không thể xóa Danh mục này');
                 window.location = '";
                     echo route('category-list');
             echo"'
@@ -67,30 +75,14 @@ class CategoryController extends Controller
         }   	
     }
 
-    public function search(Request $request)
-    {
-        if ($request->ajax()) {
-            $output = '';
-            $categories = DB::table('categories')->where('name', 'LIKE', '%' . $request->search . '%')->get();
-            if ($categories) {
-                foreach ($categories as $key => $category) {
-                    $output .= '<tr>
-                    <td class="text-center">' . $category->id . '</td>
-                    <td>' . $category->name . '</td>
-                    <td>' . $category->parent_id. '</td>
-                    <td>' . $category->created_at . '</td>
-                    <td>' . $category->updated_at . '</td>
-                    </tr>';
-                }
-            }
-            
-            return Response($output);
-        }
-    }
 
     public function dashboard()
     {
-        return view('admin.layouts.dashboard');
+        $order = Order::all();
+        $product = Product::all();
+        $comment = Comment::all();
+        $user = User::all();
+        return view('admin.layouts.dashboard', compact('order', 'product', 'comment', 'user'));
     }
 
 }

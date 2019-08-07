@@ -11,10 +11,20 @@ use Auth;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-    	$listUser = User::all();
-    	return view('admin.user.index', compact('listUser'));
+    	$listUser = User::with('roles');
+        if($request->search) {
+            $listUser = $listUser->where('name', 'LIKE', '%'.$request->search.'%')
+                                        ->orWhere('email', 'LIKE', '%'.$request->search.'%')
+                                        ->orWhere('role_id', 'LIKE', '%'.$request->search.'%');
+        } 
+        if($request->role) {
+            $listUser->where('role_id', $request->role);
+        }
+        $listUser = $listUser->orderBy('id', 'DESC')->paginate(10);
+        $roles = Role::all();
+    	return view('admin.user.index', compact('listUser', 'roles'));
     }
 
     public function create()
@@ -45,7 +55,7 @@ class UserController extends Controller
     {
     	$roles = Role::all();
     	$user = User::find($id);
-    	if ((Auth::user()->id != 1) && (($id == 1) || ($user->role_id == 1 && (Auth::user()->id != $id)))) {
+    	if ((Auth::user()->role_id == 2) && ($user->role_id == 1 || ($user->role_id == 2 && (Auth::user()->id != $id)))) {
     		return redirect()->route('user-list')->with(['type_message' => 'danger', 'flash_message' => 'Sorry ! You can\'t edit user.']);
     	} 
     	return view('admin.user.edit', compact('user', 'roles', 'id'));
@@ -74,7 +84,7 @@ class UserController extends Controller
     {
     	$user_login = Auth::user()->id;
     	$user = User::find($id);
-    	if ($id == 1 || $user_login != 1 && $user->role_id == 1) {
+    	if ((Auth::user()->role_id == 2) && ($user->role_id == 1 || ($user->role_id == 2 && (Auth::user()->id != $id))) || $user->role_id == 1) {
     		return redirect()->route('user-list')->with(['type_message' => 'danger', 'flash_message' => 'Sorry ! You can\'t delete user.']);
     	} else {
     		$user->delete();

@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 @section('content')
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    {{-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> --}}
     
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800 text-center">Danh sách Danh mục</h1>
@@ -23,27 +23,29 @@
         </div>
         <!-- Search  -->
         <div class="col-md-4">
-            <div class="input-group" style="margin: 10px 20px 0 700px;">
-                <input type="text" class="form-control bg-light border-0 small" placeholder="Nhập từ khóa..." id="search" name="search">
-                <div class="input-group-append">
-                    <button class="btn btn-info" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
+            <form action="">
+                <div class="input-group" style="margin: 10px 20px 0 700px;">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Nhập từ khóa..." id="search" name="search" value="{{ \Request::get('search') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-info" type="submit">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="card-body">
             <div class="table-responsive">
 
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                        <tr class="text-center">
-                            <th>#</th>
-                            <th>Tên Danh mục</th>
-                            <th>Danh mục lớn</th>
-                            <th>Ngày tạo</th>
-                            <th>Ngày sửa</th>
-                            <th colspan="2">Action</th>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">Tên Danh mục</th>
+                            <th class="text-center">Danh mục lớn</th>
+                            <th class="text-center">Ngày tạo</th>
+                            <th class="text-center">Ngày sửa</th>
+                            <th class="text-center" colspan="2">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -83,29 +85,10 @@
                         @endif
                     </tbody>
                 </table>
+                <div class="row" style="margin-left: 400px;">{{ $listCategory->links() }}</div>
             </div>
         </div>
     </div>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#search').on('keyup',function(){
-                $value = $(this).val();
-                console.log($value);
-                $.ajax({
-                    type: 'get',
-                    url: '{{ route('category-search') }}',
-                    data: {
-                        'search': $value
-                    },
-                    success:function(data){
-                        $('tbody').html(data);
-                    }
-                });
-            });
-            $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
-        });
-        
-    </script>
 	
 @endsection

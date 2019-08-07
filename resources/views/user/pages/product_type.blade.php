@@ -91,64 +91,6 @@
 	                    </button>
                     @endforeach
                 </div>
-                <div class="flex-w flex-c-m m-tb-10 flex-r-m wrap-icon-header">
-                    <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
-                        <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
-                        <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-                        Filter
-                    </div>
-                    <div class="bor17 of-hidden pos-relative">
-						<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
-
-						<button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-							<i class="zmdi zmdi-search"></i>
-						</button>
-					</div>
-                </div>
-                <!-- Filter -->
-                <div class="dis-none panel-filter w-full p-t-10">
-                    <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-                        <div class="filter-col1 p-r-15 p-b-27">
-                            <div class="mtext-102 cl2 p-b-15">
-                                Sort By
-                            </div>
-                            <ul>
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                    Price: Low to High
-                                    </a>
-                                </li>
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                    Price: High to Low
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="filter-col2 p-r-15 p-b-27">
-                            <div class="mtext-102 cl2 p-b-15">
-                                Price
-                            </div>
-                            <ul>
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                    All
-                                    </a>
-                                </li>
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                    $0.00 - $50.00
-                                    </a>
-                                </li>
-                                <li class="p-b-6">
-                                    <a href="#" class="filter-link stext-106 trans-04">
-                                    $50.00 - $100.00
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="row isotope-grid">
             @foreach($product as $item)	
@@ -156,7 +98,9 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                        	<div class="ribbon-wrapper"><div class="ribbon sale">{{ $item->status }}</div></div>
+                            @if($item->status == 'Sale')
+                        	   <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
+                               @endif
                             <a href="{{ route('product-detail', $item->id) }}">
                                 <img src="upload/{{ $item->image }}" alt="IMG-PRODUCT" height="350px">
                             </a>                           

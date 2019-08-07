@@ -10,7 +10,7 @@ function accessDelete(message)
 
 $(document).ready(function() {
 	$("#addImages").click(function() {
-		$("#insert").append('<div class="form-group"><input type="file" class="form-control-file" name="image_detail[]"></div>');
+		$("#insert").append('<div class="form-group"><input type="file" class="form-control-file" name="image_detail[]" multiple></div>');
 	});
 });
 

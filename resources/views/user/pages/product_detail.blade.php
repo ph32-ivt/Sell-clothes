@@ -237,7 +237,9 @@
 							<!-- Block2 -->
 							<div class="block2">
 								<div class="block2-pic hov-img0">
-									<div class="ribbon-wrapper"><div class="ribbon sale">{{ $relate->status }}</div></div>
+									@if($relate->status == 'Sale')
+										<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
+									@endif
 									<a href="{{ route('product-detail', $relate->id) }}">
 										<img src="upload/{{ $relate->image }}" alt="IMG-PRODUCT" height="300">
 									</a>

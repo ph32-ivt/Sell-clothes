@@ -5,6 +5,7 @@
         <base href="{{ asset('') }}">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!--===============================================================================================-->	
         <link rel="icon" type="image/png" href="user/images/icons/favicon.png"/>
 
@@ -35,6 +36,55 @@
         <link rel="stylesheet" type="text/css" href="user/css/util.css">
         <link rel="stylesheet" type="text/css" href="user/css/main.css">
         <link rel="stylesheet" type="text/css" href="user/css/my-style.css">
+
+        
+        {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
+        <script src="user/vendor/jquery/jquery-3.2.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <script type="text/javascript">
+            <?php $products = DB::table('products')->get();  ?>
+            $(function() {
+                var source = [
+                @foreach($products as $pro)
+                    {
+                        value: "<?php echo url('/'); ?>/product-detail/<?php echo $pro->id ?>",
+                        label: "<?php echo $pro->name; ?>",
+                    },
+                @endforeach
+                ];
+
+                $("#proList").autocomplete({
+                    minLength: 2,
+                    source: source,
+                    focus: function(event, ui) {
+                        $(this).val(ui.item.label);
+                        return false;
+                    },
+                    select: function(event, ui) {
+                        $(this).val(ui.item.label);
+                        $('#hint').val(ui.item.label);
+                        // $( "this" ).attr( "src", "upload/" + ui.item.image);
+                        window.location.href = ui.item.value;
+                        return false;   
+                    }
+                });
+
+                // .autocomplete('instance')._renderItem = function( ul, item ) {
+                //   return $( "<li>" )
+                //     .append( "<img src=" + item.image + " alt=" + item.label + "/>" )
+                //     .append('<a>' + item.label + '</a>')
+                //     .appendTo( ul );
+                // };
+            });
+
+            
+        </script> 
+        <style>
+            /* .ui-autocomplete {height: 200px; overflow-y: scroll; overflow-x: hidden;} */
+            .ui-autocomplete { overflow: auto; }
+        </style>
+        
         <!--===============================================================================================-->
     </head>
     <body class="animsition">
@@ -59,7 +109,7 @@
         </div>
 
         <!--===============================================================================================-->	
-        <script src="user/vendor/jquery/jquery-3.2.1.min.js"></script>
+        
         <!--===============================================================================================-->
         <script src="user/vendor/animsition/js/animsition.min.js"></script>
         <!--===============================================================================================-->
@@ -160,5 +210,23 @@
         <!--===============================================================================================-->
         <script src="user/js/main.js"></script>
         <script src="admin/js/my-script.js"></script>
+        {{-- <script type="text/javascript">
+            $('#search').on('keyup',function(){
+                $value = $(this).val();
+                $.ajax({
+                    type: 'get',
+                    url: '{{ route('search') }}',
+                    data: {
+                        'search': $value
+                    },
+                    success:function(data){
+                        $('#ajax').html(data);
+                    }
+                });
+            })
+            $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+        </script> --}}
+
+        
     </body>
 </html>

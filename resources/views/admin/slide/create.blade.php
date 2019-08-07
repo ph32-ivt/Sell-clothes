@@ -5,11 +5,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Slide <small style="font-size: 60%; color: blue;">Add</small>
+                    Slide <small style="font-size: 60%; color: blue;">Thêm</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                        <i class="fa fa-dashboard"></i>  <a href="index.html">Tổng quan</a>
                     </li>
                     <li class="active">
                         <i class="fa fa-edit"></i> Slide
@@ -31,7 +31,7 @@
 
                     <div class="form-group">
                         <label for="title">Tiêu đề <span style="color: red">*</span></label>
-                        <input name="title" type="text" class="form-control" placeholder="Enter category name" value="{{ old('title') }}">
+                        <input name="title" type="text" class="form-control" placeholder="Nhập tiêu đề" value="{{ old('title') }}">
                         @if($errors->has('title'))
                             <p class="is-danger">{{ $errors->first('title') }}</p>
                         @endif
@@ -39,7 +39,7 @@
 
                     <div class="form-group">
                         <label for="content">Nội dung <span style="color: red">*</span></label>
-                        <input name="content" type="text" class="form-control" placeholder="Enter category name" value="{{ old('content') }}">
+                        <input name="content" type="text" class="form-control" placeholder="Nhập nội dung" value="{{ old('content') }}">
                         @if($errors->has('content'))
                             <p class="is-danger">{{ $errors->first('content') }}</p>
                         @endif
@@ -47,18 +47,17 @@
 
                     <div class="form-group">
                         <label for="link">Link</span></label>
-                        <input name="link" type="text" class="form-control" placeholder="Enter category name" value="{{ old('link') }}">
-                    </div>
+                        <input name="link" type="text" class="form-control" placeholder="Nhập link">
 
                     <div class="form-group">
                         <label for="name">Hình ảnh <span style="color: red">*</span></label>
-                        <input name="name" type="file" class="form-control" placeholder="Enter category name" value="{{ old('name') }}">
+                        <input name="name" type="file" class="form-control" placeholder="Chọn file ảnh" value="{{ old('name') }}">
                         @if($errors->has('name'))
                             <p class="is-danger">{{ $errors->first('name') }}</p>
                         @endif
                     </div>
 
-				    <button type="submit" class="btn btn-primary">Submit</button>
+				    <button type="submit" class="btn btn-primary">Thêm</button>
 				</form>
 
             </div>

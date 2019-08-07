@@ -10,14 +10,14 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    User <small style="font-size: 60%; color: blue;">Edit</small>
+                    Người dùng <small style="font-size: 60%; color: blue;">Sửa</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li>
-                        <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                        <i class="fa fa-dashboard"></i>  <a href="index.html">Tổng quan</a>
                     </li>
                     <li class="active">
-                        <i class="fa fa-edit"></i> User
+                        <i class="fa fa-edit"></i> Người dùng
                     </li>
                 </ol>
             </div>
@@ -35,34 +35,34 @@
 					@method('POST')
 
                     <div class="form-group">
-                        <label for="name">UserName</label>
-                        <input name="name" type="text" class="form-control" placeholder="Enter username" value="{{ $user->name }}" disabled>
+                        <label for="name">Tên người dùng</label>
+                        <input name="name" type="text" class="form-control" placeholder="Nhập tên người dùng" value="{{ $user->name }}">
                     </div>
                     <div class="form-group">
                         <label for="name">Email</label>
-                        <input name="email" type="email" class="form-control" placeholder="Enter your email" value="{{ $user->email }}">
+                        <input name="email" type="email" class="form-control" placeholder="Nhập email" value="{{ $user->email }}">
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input name="password" type="password" class="form-control" placeholder="Enter your password">
+                        <label for="password">Mật khẩu</label>
+                        <input name="password" type="password" class="form-control" placeholder="Nhập mật khẩu">
                     </div>
                     <div class="form-group">
-                        <label for="re-password">Confirm - Password</label>
-                        <input name="re-password" type="password" class="form-control" placeholder="Enter your re-password">
+                        <label for="re-password">Nhập lại mật khẩu</label>
+                        <input name="re-password" type="password" class="form-control" placeholder="Nhập lại mật khẩu">
                     </div>
                     <div class="form-group">
-                        <label for="telephone">Telephone</label>
-                        <input name="telephone" type="text" class="form-control" placeholder="Enter your telephone" value="{{ $user->telephone }}">
+                        <label for="telephone">Số điện thoại</label>
+                        <input name="telephone" type="text" class="form-control" placeholder="Nhập số điện thoại" value="{{ $user->telephone }}">
                     </div>
                     <div class="form-group">
-                        <label for="address">Address</label>
-                        <input name="address" type="text" class="form-control" placeholder="Enter your address" value="{{ $user->address }}">
+                        <label for="address">Địa chỉ</label>
+                        <input name="address" type="text" class="form-control" placeholder="Nhập địa chỉ" value="{{ $user->address }}">
                     </div>
                     @if (Auth::user()->id != $id)
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Level</label>
                         <select class="form-control" name="role_id">
-                            <option value="" selected disabled>Please choose level user</option>
+                            <option value="" selected disabled>Vui lòng chọn level</option>
                             @foreach($roles as $key => $role)
                             <option {{ $role->id == $user->role_id ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->name }}</option>
                             @endforeach
@@ -70,7 +70,7 @@
                     </div>
                     @endif
                     <div class="form-group">
-                        <label>Gender :</label>
+                        <label>Giới tính :</label>
                         <label for="" class="radio-inline">
                             <input name="gender" value="1" checked type="radio"
                             @if ($user->gender == 1)
@@ -84,7 +84,7 @@
                         </label>
                     </div>
 
-				    <button type="submit" class="btn btn-primary">Submit</button>
+				    <button type="submit" class="btn btn-primary">Cập nhật</button>
 				</form>
 
             </div>

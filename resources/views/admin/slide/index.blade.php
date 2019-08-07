@@ -16,7 +16,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row" style="float: right; margin-right: 20px;">
-                <a class="btn btn-primary" href="{{ route('slide-create') }}">Thêm</a>
+                <a class="btn btn-primary" href="{{ route('slide-create') }}">Thêm mới</a>
             </div>
         </div>
         <div class="card-body">
