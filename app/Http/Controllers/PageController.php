@@ -20,7 +20,7 @@ class PageController extends Controller
     {
         $slides = Slide::all();
     	$category = Category::where('parent_id', 0)->get();
-        $product = DB::table('products')->orderBy('id', 'DESC')->paginate(8);
+        $product = DB::table('products')->where('deleted_at', null)->orderBy('id', 'DESC')->paginate(12);
     	return view('user.pages.homepage', compact('category', 'product', 'slides'));
     }
 
@@ -29,7 +29,8 @@ class PageController extends Controller
     	$parent_id = Category::find($id);
     	$category = Category::where('parent_id', $id)->get();
     	// dd($category);
-    	$product = DB::table('products')->where('cate_parent', $id)->orderBy('id', 'DESC')->skip(0)->take(8)->get();
+    	$product = DB::table('products')->where('deleted_at', null);
+        $product = $product->where('cate_parent', $id)->orderBy('id', 'DESC')->skip(0)->take(8)->get();
     	return view('user.pages.product_type', compact('parent_id', 'category', 'product'));
     }
 
@@ -38,7 +39,7 @@ class PageController extends Controller
     	$product = Product::find($id);
         $size = Size::all();
     	$img_detail = Image::where('product_id', $id)->get();
-    	$relate_product = Product::where('id', '<>', $id)->get();
+    	$relate_product = Product::where('id', '<>', $id)->orWhere('deleted_at', null)->get();
         $comment = Comment::where('product_id', $id)->get();
     	return view('user.pages.product_detail', compact('product', 'img_detail', 'relate_product', 'size', 'comment'));
     }

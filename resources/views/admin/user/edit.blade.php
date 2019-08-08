@@ -27,8 +27,6 @@
 
         <div class="row">
             <div class="col-lg-6">
-                <!-- Thông báo lỗi -->
-                @include('admin.blocks.error')
 
                 <form method="POST" action="{{ route('user-update', $user->id) }}">
 					@csrf
@@ -45,10 +43,16 @@
                     <div class="form-group">
                         <label for="password">Mật khẩu</label>
                         <input name="password" type="password" class="form-control" placeholder="Nhập mật khẩu">
+                        @if($errors->has('password'))
+                            <p class="is-danger">{{ $errors->first('password') }}</p>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="re-password">Nhập lại mật khẩu</label>
                         <input name="re-password" type="password" class="form-control" placeholder="Nhập lại mật khẩu">
+                        @if($errors->has('re-password'))
+                            <p class="is-danger">{{ $errors->first('re-password') }}</p>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="telephone">Số điện thoại</label>
@@ -58,7 +62,7 @@
                         <label for="address">Địa chỉ</label>
                         <input name="address" type="text" class="form-control" placeholder="Nhập địa chỉ" value="{{ $user->address }}">
                     </div>
-                    @if (Auth::user()->id != $id)
+                    @if (Auth::user()->role_id == 1)
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Level</label>
                         <select class="form-control" name="role_id">

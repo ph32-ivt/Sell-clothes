@@ -17,7 +17,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-    	$listProduct = Product::with('category');
+    	$listProduct = Product::with('category')->where('deleted_at', null);
         if($request->search) {
             $listProduct = $listProduct->where('name', 'LIKE', '%'.$request->search.'%')
                                         ->orWhere('price', 'LIKE', '%'.$request->search.'%')
@@ -26,7 +26,7 @@ class ProductController extends Controller
         if($request->cate) {
             $listProduct->where('category_id', $request->cate);
         }
-        $listProduct = $listProduct->where('deleted_at', null)->orderBy('id', 'DESC')->paginate(5);
+        $listProduct = $listProduct->orderBy('id', 'DESC')->paginate(5);
         $categories = Category::where('parent_id', '<>', 0)->get();
     	return view('admin.product.index', compact('listProduct', 'categories'));
     }
@@ -128,7 +128,7 @@ class ProductController extends Controller
         return redirect()->route('product-list')->with(['type_message' => 'success', 'flash_message' => 'Chúc mừng ! Bạn đã cập nhật thông tin sản phẩm thành công.']);
     }
 
-    public function delImage($id)
+    public function delImage(Request $request, $id)
     {
         if ($request->ajax()) {
             $idHinh = (int)$request->get('idHinh');

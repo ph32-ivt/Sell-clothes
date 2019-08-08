@@ -68,17 +68,8 @@
 										<td class="column-1">{{ $item->name }} - {{ $item->options->size }}</td>
 										<td class="column-1">{{ number_format($item->price) }} VND</td>
 										<td class="column-1">
-											<div class="wrap-num-product flex-w m-l-auto m-r-0 qty" style="margin-left: 50px">
-												<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-													<i class="fs-16 zmdi zmdi-minus"></i>
-												</div>
 
-												<input class="mtext-104 cl3 txt-center num-product" type="number" name="qty" value="{{ $item->qty }}" onchange="updateCart(this.value, '{{ $item->rowId }}')">
-
-												<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-													<i class="fs-16 zmdi zmdi-plus"></i>
-												</div>
-											</div>
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="qty" value="{{ $item->qty }}" onchange="updateCart(this.value, '{{ $item->rowId }}')" style="padding: 8px">
 										</td>
 										<td class="column-1">
 											<a href="{{ route('deleteCart', $item->rowId) }}">

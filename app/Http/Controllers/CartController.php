@@ -18,7 +18,6 @@ class CartController extends Controller
     {
     	// $product = Product::with('promotions')->find($id);
     	$product = Product::find($id);
-    	$promotion = Promotion::find($id);
     	if ($request->qty) {
     		$qty = $request->qty;
     	} else {

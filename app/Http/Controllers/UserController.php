@@ -65,8 +65,15 @@ class UserController extends Controller
     {
     	// Validate password
 		$this->validate($request,
-			['re-password' => 'same:password'],
-			['re-password.same' => 'Re-Password don\'t math !']
+			[
+                're-password' => 'required|same:password',
+                'password' => 'required'
+            ],
+			[
+                're-password.same' => 'Mật khẩu không giống nhau !',
+                're-password.required' => 'Vui lòng nhập lại mật khẩu.',
+                'password.required' => 'Vui lòng nhập mật khẩu'
+            ]
 		);
 		// Update data user
 		$user = User::find($id);

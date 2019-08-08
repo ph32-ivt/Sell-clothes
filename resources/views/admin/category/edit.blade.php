@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <label for="parent_id">Danh mục lớn</label>
                         <select name="parent_id" class="form-control">
-                            <option value="0" disabled="disabled">Vui lòng chọn Danh mục</option>
+                            <option value="0" >Vui lòng chọn Danh mục</option>
                             <?php edit_category_parent($cate_parent, 0, "--", $category['parent_id']) ?>
                         </select>
                     </div>

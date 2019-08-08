@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('status');
             $table->float('price');
             $table->string('image');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->integer('cate_parent');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

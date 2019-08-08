@@ -76,9 +76,9 @@
     <section class="bg0 p-t-23 p-b-140">
         <div class="container">
             <div class="p-b-10">
-                <h3 class="ltext-103 cl5">
-                    Product Overview
-                </h3>
+                <h1 class=" cl5">
+                    SẢN PHẨM MỚI NHẤT
+                </h1>
             </div>
             <div class="flex-w flex-sb-m p-b-52">
                 <div class="flex-w flex-l-m filter-tope-group m-tb-10">

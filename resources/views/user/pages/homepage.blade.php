@@ -136,9 +136,9 @@
     <section class="bg0 p-t-23 p-b-140">
         <div class="container">
             <div class="p-b-10">
-                <h3 class="ltext-103 cl5">
-                    Product Overview
-                </h3>
+                <h1 class=" cl5">
+                    SẢN PHẨM MỚI NHẤT
+                </h1>
             </div>
             <div class="flex-w flex-sb-m p-b-52">
                 <div class="flex-w flex-l-m filter-tope-group m-tb-10">
@@ -186,15 +186,15 @@
                             </div>
                         </div>
                     </div>
-                    <?php $last_id = $item->id ?>
+                    
                     
                 @endforeach
             
             </div>
             <!- Load more ->
             <div id="load_more" class="flex-c-m flex-w w-full p-t-45">
-                <button id="load_more_button" name="load_more_button" data-id="{{ $last_id }}" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-                Load More
+                <button id="load_more_button" name="load_more_button" data-id="" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+                Xem thêm
                 </button>
 
             </div>
